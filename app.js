@@ -10,9 +10,9 @@ sign_in_btn.addEventListener("click", () => {
   container.classList.remove("sign-up-mode");
 });
 
-document.getElementById('sign-in-form').addEventListener("submit",(event)=>{
-  event.preventDefault()
+document.getElementById("sign-in-form").addEventListener("submit", (event) => {
+  event.preventDefault();
 });
-document.getElementById('sign-up-form').addEventListener("submit",(event)=>{
-  event.preventDefault()
+document.getElementById("sign-up-form").addEventListener("submit", (event) => {
+  event.preventDefault();
 });
