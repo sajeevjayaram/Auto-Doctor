@@ -8,7 +8,6 @@
   <!----======== CSS ======== -->
   <link rel="stylesheet" href="dashboard.css" />
 
-
   <!----===== Iconscout CSS ===== -->
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
 
@@ -110,11 +109,16 @@
           <i class="uil uil-chart"></i>
           <span class="text" id="analytics">Analytics</span>
         </div>
-        <div class="pie-chart" style="overflow-x:auto;">
-          <div id="pie-cool-lvl" class="pie animate no-round" style="--p:80;--c:#EAEA7F;">Coolant Quality <br> 80%</div>
-          <div id="pie-oil-qua" class="pie animate no-round" style="--p:80;--c:#EAEA7F;">Oil Quality <br> 80%</div>
-          <div id="pie-oil-lvl" class="pie animate no-round" style="--p:80;--c:#EAEA7F;">Oil Level <br> 80%</div>
-        </div>
+          <div class="pieboxes pie-chart" style="overflow-x:auto;">
+            <div class="box box2">
+              <div id="pie-cool-lvl" class="pie animate no-round" style="--p:80;--c:#EAEA7F;">Coolant Quality <br> 80%</div>
+            </div>
+            <div class="box box2">
+              <div id="pie-oil-qua" class="pie animate no-round" style="--p:80;--c:#EAEA7F;">Oil Quality <br> 80%</div>
+            </div>
+            <div class="box box2">
+              <div id="pie-oil-lvl" class="pie animate no-round" style="--p:80;--c:#EAEA7F;">Oil Level <br> 80%</div>
+            </div>
       </div>
       <div class="myveh" id="myvehicle">
         <div class="title">
@@ -122,7 +126,7 @@
           <span class="text" id="analytics">My Vehicle Info</span>
           <button type="button"  id="down1"  style="border-radius: 50%;margin:2%;border: none;"><i class="uil uil-download-alt"></i></button>
         </div>
-        <div style="overflow-x:auto; width: 60%;">
+        <div style="overflow-x:auto;">
           <table style="text-align: center;" id="table1">
             <tr id="basic-info">
               <td class="data-list">Maker</td>
@@ -188,25 +192,25 @@
               <td class="data-list">Oil Level</td>
               <td class="data-list date"></td>
               <td class="data-list new"></td>
-              <td class="data-list">50</td>
+              <td class="data-list status"></td>
             </tr>
             <tr id="oil-quality">
               <td class="data-list">Oil Quality</td>
               <td class="data-list date"></td>
               <td class="data-list new"></td>
-              <td class="data-list">94</td>
+              <td class="data-list status"></td>
             </tr>
             <tr id="oil level">
               <td class="data-list">Coolant Level</td>
               <td class="data-list date"></td>
               <td class="data-list new"></td>
-              <td class="data-list">67</td>
+              <td class="data-list status"></td>
             </tr>
             <tr id="vibration">
               <td class="data-list">Pressure</td>
               <td class="data-list date"></td>
               <td class="data-list new"></td>
-              <td class="data-list">67</td>
+              <td class="data-list status"></td>
             </tr>
           </table>
         </div>
@@ -248,12 +252,27 @@
       document.getElementById("loc-inf").innerText = location;
       var classDate = document.getElementsByClassName("data-list date")
       var classData = document.getElementsByClassName("data-list new")
+      var statusData = document.getElementsByClassName("data-list status")
     
-      var sensorData = [oil_level,oil_quality,coolant_level,pressure]
+      var sensorData = [oil_level,oil_quality,coolant_level]
       for (let i = 0 ; i < classDate.length ; i++){
         classDate[i].innerText = date
         classData[i].innerHTML = sensorData[i]
+        if (sensorData[i] >70){
+          statusData[i].innerText = "High"
+          statusData[i].style.color = "rgb(13,228,45)"
+        }
+        else if(sensorData[i]>30){
+          statusData[i].innerText = "Medium"
+          statusData[i].style.color = "rgb(255,204,0)"
+        }
+        else{
+          statusData[i].innerText = "Low"
+          console.log("low")
+          statusData[i].style.color = "rgb(204,51,0)"
+        }
       }
+      
 
       var pieOilLvl = document.getElementById("pie-oil-lvl")
       var pieOilQua = document.getElementById("pie-oil-qua")
