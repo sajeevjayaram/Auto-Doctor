@@ -114,9 +114,9 @@
           <span class="text" id="analytics">Analytics</span>
         </div>
           <div class="pieboxes pie-chart" style="overflow-x:auto;">
-            <div class="box box2">
-              <div id="pie-cool-lvl" class="pie animate no-round" style="--p:80;--c:#EAEA7F;">Coolant Quality <br> 80%</div>
-            </div>
+            <!-- <div class="box box2">
+              <div id="pie-cool-lvl" class="pie animate no-round" style="--p:80;--c:#EAEA7F;">Coolant Level <br> 80%</div>
+            </div> -->
             <div class="box box2">
               <div id="pie-oil-qua" class="pie animate no-round" style="--p:80;--c:#EAEA7F;">Oil Quality <br> 80%</div>
             </div>
@@ -200,12 +200,12 @@
               <td class="data-list new"></td>
               <td class="data-list status"></td>
             </tr>
-            <tr id="oil level">
+            <!-- <tr id="oil level">
               <td class="data-list">Coolant Level</td>
               <td class="data-list date"></td>
               <td class="data-list new"></td>
               <td class="data-list status"></td>
-            </tr>
+            </tr> -->
             <tr id="vibration">
               <td class="data-list">Pressure</td>
               <td class="data-list date"></td>
@@ -228,14 +228,22 @@
     import { getDatabase, ref, onValue,set,serverTimestamp} from 'https://www.gstatic.com/firebasejs/9.7.0/firebase-database.js'
 
     const firebaseApp = initializeApp({
-      apiKey: "AIzaSyCpvYXGtevmREB1kwZV0n7jf_yYvE7iWTM",
-      authDomain: "auto-doctor-7cd33.firebaseapp.com",
-      databaseURL: "https://auto-doctor-7cd33-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "auto-doctor-7cd33",
-      storageBucket: "auto-doctor-7cd33.appspot.com",
-      messagingSenderId: "812135743704",
-      appId: "1:812135743704:web:754e4ca697ca38c98057ad",
-      measurementId: "G-T8R2C1L04G"
+      apiKey: "AIzaSyDqevLosAMAfpWwLSb-Ju98zdeY_76_3UM",
+  authDomain: "final-9209a.firebaseapp.com",
+  databaseURL: "https://final-9209a-default-rtdb.firebaseio.com",
+  projectId: "final-9209a",
+  storageBucket: "final-9209a.appspot.com",
+  messagingSenderId: "696014951062",
+  appId: "1:696014951062:web:4765f510b02fe45d76e8b7"
+
+      // apiKey: "AIzaSyCpvYXGtevmREB1kwZV0n7jf_yYvE7iWTM",
+      // authDomain: "auto-doctor-7cd33.firebaseapp.com",
+      // databaseURL: "https://auto-doctor-7cd33-default-rtdb.asia-southeast1.firebasedatabase.app",
+      // projectId: "auto-doctor-7cd33",
+      // storageBucket: "auto-doctor-7cd33.appspot.com",
+      // messagingSenderId: "812135743704",
+      // appId: "1:812135743704:web:754e4ca697ca38c98057ad",
+      // measurementId: "G-T8R2C1L04G"
     });
     const db = getDatabase();
     const reference = ref(db, 'user1/sensor_data');
@@ -260,7 +268,7 @@
       var classData = document.getElementsByClassName("data-list new")
       var statusData = document.getElementsByClassName("data-list status")
     
-      var sensorData = [oil_level,oil_quality,coolant_level]
+      var sensorData = [oil_level,oil_quality]
       for (let i = 0 ; i < sensorData.length ; i++){
         classDate[i].innerText = date
         classData[i].innerHTML = sensorData[i]+'%'
@@ -278,23 +286,22 @@
           statusData[i].style.color = "rgb(204,51,0)"
         }
       }
-      classDate[3].innerHTML = date
+      classDate[2].innerHTML = date
       if (accident==true){
-        classData[3].innerHTML = "True"
-        statusData[3].innerHTML = '<i class="uil uil-car">'
-        statusData[3].style.color = "rgb(204,51,0)"
+        classData[2].innerHTML = "True"
+        statusData[2].innerHTML = '<i class="uil uil-car">'
+        statusData[2].style.color = "rgb(204,51,0)"
       }
       else{
-        classData[3].innerHTML = "False"
-        statusData[3].innerHTML = '<i class="uil uil-car" >'
-        statusData[3].style.color = "rgb(13,228,45)"
+        classData[2].innerHTML = "False"
+        statusData[2].innerHTML = '<i class="uil uil-car" >'
+        statusData[2].style.color = "rgb(13,228,45)"
       }
 
       
 
       var pieOilLvl = document.getElementById("pie-oil-lvl")
       var pieOilQua = document.getElementById("pie-oil-qua")
-      var pieCoolLvl  = document.getElementById("pie-cool-lvl")
       var status = document.getElementById("veh-status")
 
       pieOilLvl.innerHTML = `Oil Level <br> ${oil_level}%`
@@ -303,19 +310,16 @@
 
       pieOilQua.innerHTML = `Oil Quality <br> ${oil_quality}%`
       pieOilQua.setAttribute("style",`--p:${oil_quality}`)
-
-      pieCoolLvl.innerHTML = `Coolant Quality <br> ${coolant_level}%`
-      pieCoolLvl.setAttribute("style",`--p:${coolant_level}`)
       
 
 
 //Overall Health Status
 
     if(accident != true){
-      if (oil_level >70 && oil_quality > 70 && coolant_level >70){
+      if (oil_level >70 && oil_quality > 70){
           status.innerText = "Excellent"
       } 
-      else if (oil_level >30 && oil_quality > 30 && coolant_level >30){
+      else if (oil_level >30 && oil_quality > 30){
         status.innerText = "Average"
       }
       else{
